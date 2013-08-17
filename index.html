@@ -42,6 +42,18 @@
                     utils.moveCursor(code_first_nbsp);
                 }
             }
+            // -
+            else if (evt.which == 189) {
+                if (buf === '--') {
+                    utils.selectText(-3);
+                    utils.replaceSelectedText([
+                        $('<hr/>')[0]
+                    ]);
+                } else if (buf === '-' || buf === '') {
+                    buf += '-';
+                }
+            }
+
             // // x
             // else if (evt.which == 88) {
             //     if (buf !== '`') {

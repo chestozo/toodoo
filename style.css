@@ -11,6 +11,7 @@ html {
   padding: 10px;
   outline: none;
   line-height: 1.4em;
+  overflow: hidden;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -25,4 +26,9 @@ html {
   border: 1px solid #ddd;
   border-radius: 3px;
   font: 12px Consolas, "Liberation Mono", Courier, monospace;
+}
+hr {
+  border: 1px solid #eee;
+  width: 110%;
+  margin-left: -5%;
 }

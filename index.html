@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>toodoo</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="http://yandex.st/jquery/1.8.2/jquery.min.js"></script>
+</head>
+<body>
+    <div class="content" contenteditable>
+        Hey
+    </div>
+    <script>
+        function selectText2(delta) {
+            var root = $('.content')[0];
+            var sel = window.getSelection();
+            var range = sel.getRangeAt(0).cloneRange();
+            (delta >= 0) && range.setEnd(range.endContainer, range.endOffset + delta);
+            (delta < 0) && range.setStart(range.startContainer, range.startOffset + delta);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+
+        function replaceSelectedText(node) {
+            var sel = window.getSelection();
+            range = sel.getRangeAt(0);
+            range.deleteContents();
+            range.insertNode(node);
+
+            range = document.createRange();
+            range.setStartAfter(node);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+
+        var buf = '';
+        $('.content').bind('keyup', function(evt) {
+            // [
+            if (evt.which == 219) {
+                buf = '[';
+            }
+            // ]
+            else if (evt.which == 221) {
+                if (buf === '[') {
+                    selectText2(-2);
+                    replaceSelectedText( $('<input type="checkbox"/>')[0] );
+                }
+            }
+            else {
+                buf = '';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+*.styl . stylus ${watch_src_path}

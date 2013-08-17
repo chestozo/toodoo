@@ -6,7 +6,7 @@
     <script type="text/javascript" src="utils.js"></script>
 </head>
 <body>
-    <div class="content" contenteditable>
+    <div class="content" spellcheck="false" contenteditable>
         ...
     </div>
     <script>
@@ -34,7 +34,7 @@
                     utils.selectText(-2);
 
                     var code_first_nbsp = utils.nbsp();
-                    var code = $('<span style="background: #DDD;"/>').append(code_first_nbsp, utils.nbsp())[0];
+                    var code = $('<span class="code"/>').append(code_first_nbsp, utils.nbsp())[0];
                     utils.replaceSelectedText([
                         code,
                         utils.nbsp()
@@ -42,6 +42,22 @@
                     utils.moveCursor(code_first_nbsp);
                 }
             }
+            // // x
+            // else if (evt.which == 88) {
+            //     if (buf !== '`') {
+            //         buf = '`';
+            //     } else {
+            //         utils.selectText(-2);
+
+            //         var code_first_nbsp = utils.nbsp();
+            //         var code = $('<span style="background: #DDD;"/>').append(code_first_nbsp, utils.nbsp())[0];
+            //         utils.replaceSelectedText([
+            //             code,
+            //             utils.nbsp()
+            //         ]);
+            //         utils.moveCursor(code_first_nbsp);
+            //     }
+            // }
             else {
                 buf = '';
             }

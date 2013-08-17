@@ -56,7 +56,8 @@
                 if (buf === '[') {
                     selectText2(-2);
                     replaceSelectedText([
-                        $('<input type="checkbox"/>')[0]
+                        $('<input type="checkbox"/>')[0],
+                        nbsp()
                     ]);
                 }
             }

@@ -19,16 +19,30 @@
             sel.addRange(range);
         }
 
-        function replaceSelectedText(node) {
+        function replaceSelectedText(nodes) {
             var sel = window.getSelection();
             range = sel.getRangeAt(0);
             range.deleteContents();
-            range.insertNode(node);
+            for (var i = 0; i < nodes.length; i++) {
+                range.insertNode(nodes[i]);
 
-            range = document.createRange();
+                range = document.createRange();
+                range.setStartAfter(nodes[i]);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }
+
+        function moveCursor(node) {
+            var sel = window.getSelection();
+            var range = document.createRange();
             range.setStartAfter(node);
             sel.removeAllRanges();
             sel.addRange(range);
+        }
+
+        function nbsp() {
+            return document.createTextNode('\u00A0');
         }
 
         var buf = '';
@@ -41,7 +55,25 @@
             else if (evt.which == 221) {
                 if (buf === '[') {
                     selectText2(-2);
-                    replaceSelectedText( $('<input type="checkbox"/>')[0] );
+                    replaceSelectedText([
+                        $('<input type="checkbox"/>')[0]
+                    ]);
+                }
+            }
+            // `
+            else if (evt.which == 192) {
+                if (buf !== '`') {
+                    buf = '`';
+                } else {
+                    selectText2(-2);
+
+                    var code_first_nbsp = nbsp();
+                    var code = $('<span style="background: #DDD;"/>').append(code_first_nbsp, nbsp())[0];
+                    replaceSelectedText([
+                        code,
+                        nbsp()
+                    ]);
+                    moveCursor(code_first_nbsp);
                 }
             }
             else {
